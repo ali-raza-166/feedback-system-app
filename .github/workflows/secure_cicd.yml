@@ -53,12 +53,6 @@ jobs:
                   --config=p/security-audit
                   --sarif --output=semgrep.sarif
               continue-on-error: true
-            - name: Upload results to Security tab
-              if: always()
-              uses: github/codeql-action/upload-sarif@v3
-              with:
-                  sarif_file: semgrep.sarif
-                  category: semgrep
 
     dependency-scan:
         name: SCA (Trivy)
@@ -73,12 +67,7 @@ jobs:
                   scanners: vuln
                   format: sarif
                   output: trivy.sarif
-            - name: Upload results to Security tab
-              if: always()
-              uses: github/codeql-action/upload-sarif@v3
-              with:
-                  sarif_file: trivy.sarif
-                  category: trivy
+
             - name: Trivy gate (fail on CRITICAL)
               uses: aquasecurity/trivy-action@master
               with:
