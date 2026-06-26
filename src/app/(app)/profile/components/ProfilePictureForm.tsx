@@ -10,7 +10,10 @@ import * as z from "zod";
 import { Form, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-export default function ProfilePictureForm() {
+interface ProfilePictureFormProps {
+  username?: string; 
+}
+export default function ProfilePictureForm({ username }: ProfilePictureFormProps) {
   const [localImage, setLocalImage] = useState<string | null>(null); // State to hold uploaded image URL
   const toast = useToast();
   const form = useForm<z.infer<typeof ProfilePictureSchema>>({
