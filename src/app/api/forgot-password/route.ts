@@ -29,7 +29,7 @@ export async function POST(request: Request) {
       expiresIn: "30s",
     });
 
-    const resetLink = `${process.env.PUBLIC_DOMAIN}/reset-password?token=${token}`;
+    const resetLink = `${process.env.NEXT_PUBLIC_DOMAIN}/reset-password?token=${token}`;
     await sendResetPasswordEmail(user.username, user.email, resetLink);
     return sendResponse({
       status: 200,
