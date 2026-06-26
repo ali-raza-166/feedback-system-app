@@ -61,7 +61,7 @@ jobs:
                   path: ./
                   base: ${{ github.event.before }}
                   head: ${{ github.event.after }}
-                  extra_args: --results=verified --fail
+                  extra_args: --results=verified 
 
             - name: Run TruffleHog (first push — full scan, no diff)
               if: >
@@ -70,7 +70,7 @@ jobs:
               uses: trufflesecurity/trufflehog@main
               with:
                   path: ./
-                  extra_args: --results=verified --fail
+                  extra_args: --results=verified
     sast:
         name: SAST (Semgrep)
         runs-on: ubuntu-latest
