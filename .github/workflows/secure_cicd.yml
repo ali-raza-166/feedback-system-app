@@ -146,6 +146,7 @@ jobs:
               run: |
                   docker build \
                   --build-arg NEXT_PUBLIC_DOMAIN="${{ secrets.NEXT_PUBLIC_DOMAIN }}" \
+                  --build-arg MONGODB_URI="${{ secrets.MONGODB_URI }}" \
                   -t "${{ steps.vars.outputs.latest_tag }}" .
 
             - name: Log in to ACR
