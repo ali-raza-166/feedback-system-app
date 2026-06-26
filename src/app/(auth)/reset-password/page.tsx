@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, Suspense } from "react";
 import { Form, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -13,7 +13,9 @@ import { Loader2 } from "lucide-react";
 import { resetPasswordSchema } from "@/schemas/resetPasswordSchema";
 import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
-export default function page() {
+
+// 1. Rename your main function to a content component
+function ResetPasswordContent() {
   const [successFlag, setSuccessFlag] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
@@ -45,10 +47,8 @@ export default function page() {
       });
       router.push(`/sign-in`);
     } catch (error) {
-      // console.error("Error during sign-up:", error);
       const axiosError = error as AxiosError<ApiResponse>;
-      let errorMessage = axiosError.response?.data.message;
-      ("There was a problem while resetting your password. Please try again.");
+      let errorMessage = axiosError.response?.data.message || "There was a problem while resetting your password. Please try again.";
 
       toast({
         title: "Error resetting password",
@@ -113,5 +113,18 @@ export default function page() {
         </Form>
       </div>
     </div>
+  );
+}
+
+// 2. Create the default export and wrap the content in Suspense
+export default function Page() {
+  return (
+    <Suspense fallback={
+      <div className="flex justify-center items-center min-h-screen">
+        <Loader2 className="h-8 w-8 animate-spin" />
+      </div>
+    }>
+      <ResetPasswordContent />
+    </Suspense>
   );
 }
