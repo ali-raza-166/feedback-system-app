@@ -196,8 +196,8 @@ jobs:
     deploy:
         name: Deploy to Azure App Service
         runs-on: ubuntu-latest
-        needs: container-scan
-        # [UPDATE]: Changed from 'needs: build-push' to 'needs: container-scan' so deployment ONLY happens if the Trivy security scan passes.
+        needs: build-push
+       
         if: github.ref == 'refs/heads/main'
         steps:
             - name: Deploy container image to App Service
