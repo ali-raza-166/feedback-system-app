@@ -22,7 +22,7 @@ ARG OPENAI_API_KEY=sk_build_placeholder
 ARG MONGODB_URI=mongodb+srv://placeholder:placeholder@placeholder.example.mongodb.net/
 ARG NEXTAUTH_SECRET=build_placeholder
 ARG SECRET_KEY=build_placeholder
-ARG PUBLIC_DOMAIN=http://localhost:3000
+ARG NEXT_PUBLIC_DOMAIN=http://localhost:3000
 
 # Expose the args as env vars so `next build` can see them.
 ENV RESEND_API_KEY=$RESEND_API_KEY \
@@ -30,7 +30,7 @@ ENV RESEND_API_KEY=$RESEND_API_KEY \
     MONGODB_URI=$MONGODB_URI \
     NEXTAUTH_SECRET=$NEXTAUTH_SECRET \
     SECRET_KEY=$SECRET_KEY \
-    PUBLIC_DOMAIN=$PUBLIC_DOMAIN
+    NEXT_PUBLIC_DOMAIN=$NEXT_PUBLIC_DOMAIN
 RUN npm run build
 
 # ---- 3) Minimal runtime image ----
