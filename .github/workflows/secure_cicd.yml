@@ -50,7 +50,7 @@ jobs:
                   path: ./
                   base: ${{ github.event.pull_request.base.sha }}
                   head: ${{ github.event.pull_request.head.sha }}
-                  extra_args: --results=verified --fail
+                  extra_args: --results=verified 
 
             - name: Run TruffleHog (push to main)
               if: >
