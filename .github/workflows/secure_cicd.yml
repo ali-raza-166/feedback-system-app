@@ -87,7 +87,12 @@ jobs:
                   --config=p/react
                   --config=p/security-audit
                   --sarif --output=semgrep.sarif
-
+            - name: Upload Semgrep Report
+              uses: actions/upload-artifact@v4
+              if: always()
+              with:
+                  name: semgrep-report
+                  path: semgrep.sarif
     dependency-scan:
         name: SCA (Trivy)
         runs-on: ubuntu-latest
@@ -112,6 +117,12 @@ jobs:
                   ignore-unfixed: false
                   exit-code: "1"
                   format: table
+            - name: Upload Trivy SARIF as artifact
+              uses: actions/upload-artifact@v4
+              if: always()
+              with:
+                  name: trivy.sarif
+                  path: trivy.sarif
 
     sbom:
         name: SBOM (Syft / CycloneDX)
@@ -197,7 +208,7 @@ jobs:
         name: Deploy to Azure App Service
         runs-on: ubuntu-latest
         needs: build-push
-       
+
         if: github.ref == 'refs/heads/main'
         steps:
             - name: Deploy container image to App Service
