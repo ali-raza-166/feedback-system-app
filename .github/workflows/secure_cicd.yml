@@ -1,6 +1,6 @@
 name: DevSecOps - Scan & Push to ACR
 
-# Stage 1: 5 security checks run in parallel on every push/PR
+# Stage 1: 4 security checks run in parallel on every push/PR
 # Stage 2: Build image and push to ACR (main only, after all security checks pass)
 # Stage 3: Deploy to Azure App Service (main only, after image is pushed)
 on:
