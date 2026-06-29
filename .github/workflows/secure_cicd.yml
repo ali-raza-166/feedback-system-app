@@ -13,7 +13,7 @@ on:
     workflow_dispatch:
 
 permissions:
-    contents: read
+    contents: write
     security-events: write
     actions: read
 
@@ -147,6 +147,11 @@ jobs:
                   format: cyclonedx-json
                   output-file: sbom.cdx.json
                   artifact-name: sbom.cdx.json
+            - name: Attach SBOM to GitHub Release
+              uses: softprops/action-gh-release@v2
+              if: startsWith(github.ref, 'refs/tags/') # Only runs if you pushed a tag (e.g., v1.0)
+              with:
+                  files: sbom.cdx.json
 
     # ====================== STAGE 2: BUILD & PUSH (main only) ===============
 
